@@ -1,0 +1,25 @@
+<nav class="navbar navbar-light navbar-expand-sm justify-content-between">
+    <div class="container-fluid">
+        <%= link_to root_path, class: "navbar-brand" do %>
+            BookTrail
+        <% end %>
+        <div class="form-inline">
+            <%= form_with url: book_search_path, method: :get, class: "d-flex" do %>
+                <%= text_field_tag :query,
+                    params[:query],
+                    class: "form-control search-input",
+                    placeholder: "Search for a book..."
+                %>
+                <%= button_tag(type: 'submit', class: 'btn btn-outline-light') do %>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+

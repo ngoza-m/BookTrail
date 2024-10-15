@@ -12,4 +12,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  
+  get "new_goal" => "goals#new", as: :new_goal
+  get "book_search" => "pages#search", as: :book_search
+  get "book_show" => "pages#book_show", as: :book_show
 end
