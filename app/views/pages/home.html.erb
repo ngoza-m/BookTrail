@@ -1,4 +1,30 @@
-<div class="home-banner">
-<h2>BookTrail</h2>
-<h3><em>Set Your <%= Date.current.year %> Reading Goal</em></h3>
+<div class="container">
+    <div class="row">
+        <div class="left-column col-8">
+            <div class="home-page">
+                <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                <hr width="100%" size="2">
+                <p>Set your <%= link_to "reading goal", new_goal_path %></p>
+            </div>
+
+            <div class="home-page mt-5">
+                <h3><em>YOUR FAVORITE BOOKS</em></h3>
+                <hr width="100%" size="2">
+                <p>You haven't favorited any books yet. Add some books!</p>
+            </div>
+
+            <div class="home-page mt-5">
+                <h3><em>RECENTLY ADDED BOOKS</em></h3>
+                <hr width="100%" size="2">
+                <p>Check out the latest books that have been added to the site.</p>
+            </div>
+        </div>
+
+        <div class="right-column col-4">
+            <div class="home-page">
+                <h3><em>CURRENTLY READING</em></h3>
+                <hr width="100%" size="2">
+            </div>
+        </div>
+    </div>
 </div>

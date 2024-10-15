@@ -1,0 +1,27 @@
+.search-heading {
+    font-weight: bold;
+    font-size: 22px
+}
+.search-card-container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #e6e6e6;
+    gap: 20px;
+
+    h2 {
+        font-size: 23px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    img {
+        height: 250px;
+    }
+}
