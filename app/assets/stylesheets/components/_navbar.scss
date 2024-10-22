@@ -1,6 +1,7 @@
 .navbar {
   padding: 20px;
   background-color: $persianred;
+  justify-content: space-between;
 
   .btn {
     color: $light-gray;
@@ -9,6 +10,10 @@
   .form-control {
     width: 300px;
   }  
+
+  .nav-item {
+    color: white;
+  }
 }
 
 
@@ -24,3 +29,15 @@
   font-weight: bold;
   color: $light-gray;
 }
+
+.navbar .navbar-collapse {
+  flex-grow: 0;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 1rem;
+}
+

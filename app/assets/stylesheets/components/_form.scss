@@ -1,0 +1,51 @@
+// Styling for the error message
+.error-message {
+    font-size: 18px;    // Increase font size for the error message
+    color: #ff0000;     // Make the error message red for visibility
+    margin-bottom: 20px; // Add space below the error message
+}
+
+.form-container {
+    max-width: 500px;  // Limit the width of the form
+    padding: 20px;     // Add padding inside the form container
+    margin: 40px auto; // Center the container and add top/bottom margin
+    background-color: #f8f9fa; // Light background color
+    border: 1px solid #ccc;     // Border around the form container
+    // border-radius: 8px;         // Rounded corners
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add a subtle shadow
+}
+
+// Style for the submit button
+.btn-success {
+    background-color: $persianred;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: $beige;
+    color: $persianred;
+}  
+
+// Styling for input fields
+.rounded-input {
+    border-radius: 100px;
+    text-decoration: dotted;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+//styling for goal form
+
+.form-heading {
+    text-align: left;
+    font-size: 22px;
+    margin-bottom: 24px;
+    font-weight: bold;
+}

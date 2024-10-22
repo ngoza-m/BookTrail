@@ -2,9 +2,20 @@
     <div class="row">
         <div class="left-column col-8">
             <div class="home-page">
-                <h3><em><%= Date.current.year %> READING GOAL</em></h3>
-                <hr width="100%" size="2">
-                <p>Set your <%= link_to "reading goal", new_goal_path %></p>
+                <% if current_user.goals.exists? && current_user.goals.last.year > Time.now.year %>
+                    <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                    <hr width="100%" size="2">
+                    <p>Set your <%= link_to "reading goal", new_goal_path %></p>
+                <% elsif current_user.goals.exists? && current_user.goals.last.year == Time.now.year %>
+                    <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                    <hr width="100%" size="2">
+                    <% goal = current_user.goals.find_by(year: Time.now.year) %>
+                    <p>You want to read <%= goal.number_of_books %> books this year!</p>
+                <% else %>
+                    <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                    <hr width="100%" size="2">
+                    <p>Set your <%= link_to "reading goal", new_goal_path %></p>
+                <% end %>
             </div>
 
             <div class="home-page mt-5">

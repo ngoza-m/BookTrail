@@ -1,4 +1,21 @@
-<%= simple_form_for(new_goal_path) do |f| %>
-  <%= f.input :number_of_books, label: 'How many books do you want to read this year?' %>
-  <%= f.button :submit %>
-<% end %>
+<div class="container form-container">
+  <h1 class="form-heading">Set Your <%= Time.now.year %> Reading Goal</h1>
+  <div class="form-group">
+    <%= simple_form_for @reading_goal do |f| %>
+
+    <% if @reading_goal.errors.any? %>
+    <div id="error_explanation">
+      <p style="color:red; font-weight: bold;"><%= pluralize(@reading_goal.errors.count, "error") %> prohibited this goal from being saved:</p>
+      <ul style="color:red;">
+        <% @reading_goal.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <%= f.hidden_field :year, value: @year %> 
+      <%= f.input :number_of_books, as: :integer, input_html: {class: "rounded-input"}, label: 'How many books do you want to read this year?' %>
+      <%= f.button :submit, "Save Goal", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
