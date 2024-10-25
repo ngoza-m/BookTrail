@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,7 +14,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   
-  get "new_goal" => "goals#new", as: :new_goal
+  # get "new_goal" => "goals#new", as: :new_goal
   get "book_search" => "pages#search", as: :book_search
   get "book_show" => "pages#book_show", as: :book_show
+  resources :goals, only: [:new, :create]
+
 end
