@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   # root "posts#index"
   
   # get "new_goal" => "goals#new", as: :new_goal
-  get "book_search" => "pages#search", as: :book_search
-  get "book_show" => "pages#book_show", as: :book_show
+  get "book_search" => "books#search", as: :book_search
+  get "book_show" => "books#book_show", as: :book_show
   resources :goals, only: [:new, :create]
+  resources :books, only: [:new, :create, :destroy]
 
 end

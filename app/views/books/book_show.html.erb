@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="book-show row mt-5">
+        <div class="col-4 img-col">
+            <div class="book-show-cover">
+                <%= image_tag @img_url %>
+            </div>
+            <div class="book-show-buttons mt-4">
+                <% if current_user.books.find_by(book_id: @img_id) %>
+                    <%= link_to "Remove from Read", book_path(@img_id), 
+                    data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+                <% else %>
+                    <%= simple_form_for Book.new do |f| %>
+                        <%= f.hidden_field :title, value: @book["volumeInfo"]["title"]  %>
+                        <%= f.hidden_field :author, value: @book["volumeInfo"]["authors"].join(", ")  %>
+                        <%= f.hidden_field :pages, value: @book["volumeInfo"]["pageCount"] %>
+                        <%= f.hidden_field :img_url, value: @img_url  %>
+                        <%= f.hidden_field :date_finished, value: Date.today %>
+                        <%= f.hidden_field :book_id, value: @img_id %>
+                        <%= f.button :submit, "Read" %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-8">
+            <h2><%= @book["volumeInfo"]["title"] %></h2>
+            <p>Author: <%= @book["volumeInfo"]["authors"].join(", ") %></p>
+            <p>Pages: <%= @book["volumeInfo"]["pageCount"] %> </p>
+            <p>Published: <%= @book["volumeInfo"]["publishedDate"] %></p>
+            <p>Categories: <%= @book["volumeInfo"]["categories"][0] %></p>
+            <h3>DESCRIPTION:</h3>
+            <p><%= sanitize @book["volumeInfo"]["description"] %></p>
+        </div>
+    </div>
+</div>
+
+
+
