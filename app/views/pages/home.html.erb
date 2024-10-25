@@ -31,9 +31,16 @@
             </div>
 
             <div class="home-page mt-5">
-                <h3><em>RECENTLY ADDED BOOKS</em></h3>
+                <h3><em>RECENTLY READ BOOKS</em></h3>
                 <hr width="100%" size="2">
-                <p>Check out the latest books that have been added to the site.</p>
+                <% if current_user.books.exists? %>
+                    <% current_user.books.order("date_finished DESC").limit(10).each do |book| %>
+                        <%= image_tag book.img_url, class: "recently-read-img" %>
+                        <p><%= link_to book.title, book_show_path(book.book_id) %></p>
+                    <% end %>
+                <% else %>
+                <p> You haven't read any books yet. </p>
+                <% end %>
             </div>
         </div>
 
