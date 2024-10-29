@@ -4,6 +4,18 @@
     // grid-column: 2ft 1ft;
 }
 
+.scrollable-section {
+    overflow-x: scroll;
+    display: flex;
+    align-items: center; /* center items vertically */
+}
+
+.scrollable-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 12px; /* space between cards */
+}
+
 .home-page {
     display: flex;
     flex-direction: column;
@@ -33,4 +45,27 @@
         height: 150px;
         image-rendering: high-quality;
     }
+}
+
+.recently-read-books {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 200px;
+
+    img {
+        height: 300px;
+        image-rendering: high-quality;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: $persianred
+    }
+
 }
