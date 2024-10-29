@@ -33,21 +33,63 @@
             <div class="home-page mt-5">
                 <h3><em>RECENTLY READ BOOKS</em></h3>
                 <hr width="100%" size="2">
-                <% if current_user.books.exists? %>
-                    <% current_user.books.order("date_finished DESC").limit(10).each do |book| %>
-                        <%= image_tag book.img_url, class: "recently-read-img" %>
-                        <p><%= link_to book.title, book_show_path(book.book_id) %></p>
-                    <% end %>
+                <% if current_user.nil? %>
+                    <p> <%= link_to "Sign In", new_user_session_path %> to see your recently read books.</p>
                 <% else %>
-                <p> You haven't read any books yet. </p>
+                    <% if current_user.books.exists? %>
+                    <% read_books = current_user.books.where(status: "Read") %>
+                        <% if read_books.empty? %>
+                            <p> You haven't read any books yet. </p>
+                        <% else %>
+                        <div class="container scrollable-section">
+                            <div class="scrollable-wrapper">
+                                <% read_books.order("date_finished DESC").limit(10).each do |book| %>
+                            <div class="recently-read-books">
+                                <div><%= image_tag book.img_url, class: "recently-read-img" %></div>
+                                <p class="mt-2"><%= link_to book.title, book_show_path(book.book_id) %></p>
+                            </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+                    <% end %>
+                <% end %>
+            </div>
+
+            <div class="home-page col-8 mt-5">
+                <h3><em>WISHLIST</em></h3>
+                <hr width="100%" size="2">
+                <% if current_user.nil? %>
+                    <p> <%= link_to "Sign In", new_user_session_path %> to see your recently read books.</p>
+                <% else %>
+                    <% if current_user.books.exists? %>
+                    <% wishlist_books = current_user.books.where(status: "Wishlist") %>
+                        <% if wishlist_books.empty? %>
+                            <p> You haven't added any books to your wishlist yet. </p>
+                        <% else %>
+                        <div class="container scrollable-section">
+                            <div class="scrollable-wrapper">
+                                <% wishlist_books.order("date_finished DESC").limit(10).each do |book| %>
+                            <div class="recently-read-books">
+                                <div><%= image_tag book.img_url, class: "recently-read-img" %></div>
+                                <p class="mt-2"><%= link_to book.title, book_show_path(book.book_id) %></p>
+                            </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+                    <% end %>
                 <% end %>
             </div>
         </div>
+        
+
 
         <div class="right-column col-4">
             <div class="home-page">
-                <h3><em>CURRENTLY READING</em></h3>
+                <h3><em>STATS</em></h3>
                 <hr width="100%" size="2">
+
             </div>
         </div>
     </div>

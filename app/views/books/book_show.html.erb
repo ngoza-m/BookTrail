@@ -6,7 +6,7 @@
             </div>
             <div class="book-show-buttons mt-4">
                 <% if current_user.books.find_by(book_id: @img_id) %>
-                    <%= link_to "Remove from Read", book_path(@img_id), 
+                    <%= link_to "Remove Book", book_path(@img_id), 
                     data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
                 <% else %>
                     <%= simple_form_for Book.new do |f| %>
@@ -16,7 +16,8 @@
                         <%= f.hidden_field :img_url, value: @img_url  %>
                         <%= f.hidden_field :date_finished, value: Date.today %>
                         <%= f.hidden_field :book_id, value: @img_id %>
-                        <%= f.button :submit, "Read" %>
+                        <%= f.input :status, collection: ["Read", "Currently Reading", "Wishlist"], label: false, prompt: "Select"  %>
+                        <%= f.button :submit, "Add Book" %>
                     <% end %>
                 <% end %>
             </div>

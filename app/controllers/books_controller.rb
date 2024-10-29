@@ -7,7 +7,7 @@ class BooksController < ApplicationController
     @book_read = Book.new(book_params)
     @book_read.user = current_user
     if @book_read.save
-      redirect_to root_path, notice: "Book was added to your read list."
+      redirect_to root_path, notice: "Book was added."
     else
       # render :book_show, status: :unprocessable_entity
       flash.alert = "Book not saved"
@@ -39,6 +39,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :author, :pages, :img_url, :date_finished, :book_id)
+    params.require(:book).permit(:title, :author, :pages, :img_url, :date_finished, :book_id, :status)
   end
 end
