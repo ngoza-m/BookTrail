@@ -15,9 +15,25 @@ class GoalsController < ApplicationController
     end
   end
 
+  def edit
+    @reading_goal = Goal.find_by(id: params[:id], user: current_user)
+  end
+
+  def update
+    @reading_goal = Goal.find_by(id: params[:id])
+    @reading_goal.update(goal_params)
+    redirect_to root_path, notice: 'Reading goal was successfully updated!'
+  end
+
+  def destroy
+    @reading_goal = Goal.find_by(id: params[:id], user: current_user)
+    @reading_goal.destroy
+    redirect_to root_path
+  end
+
   private
 
   def goal_params
-    params.require(:goal).permit(:number_of_books, :year)
+    params.require(:goal).permit(:number_of_books, :year, :user)
   end
 end
