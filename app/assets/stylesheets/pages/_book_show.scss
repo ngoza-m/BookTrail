@@ -5,9 +5,22 @@
     }
 
     h3 {
+        font-family: "Outfit";
         font-size: 20px;
-        font-weight: bold;
+        // font-weight: bold;
+        margin-top: 20px;
         margin-bottom: 10px;
+    }
+
+    h2 {
+        font-family: "Outfit";
+        font-weight: 600;
+        font-size: 40px;
+    }
+
+    p {
+        font-family: "Quicksand";
+        font-size: 16px;
     }
 }
 
@@ -21,23 +34,25 @@
 .book-show-buttons {
     .btn {
     color: white;
-    background-color: $persianred;
+    background-color: black;
     padding: 10px 20px;
     text-decoration: none;
     }
 
     .btn:hover {
-        background-color: black;
+        background-color: $lilac;
     }
 
     a {
+        font-family: "Quicksand";
+        font-weight: bold;
         color: white;
-        background-color: $persianred;
+        background-color: black;
         padding: 10px 20px;
         text-decoration: none;
     }
 
     a:hover {
-        background-color: black;
+        background-color: $lilac;
     }
 }

@@ -1,5 +1,5 @@
 <div class="container col-6 justify-content-center">
-    <h2 class="search-heading mt-2 m-4">Search results for '<%= params[:query] %>'</h2>
+    <h2 class="search-heading mt-4 m-4">Search results for <em>'<%= params[:query] %>'</em></h2>
     <% @book_results.each do |book| %>
         <div class="search-card-container">
                 <img src="https://books.google.com/books/publisher/content/images/frontcover/<%= book["id"] %>?fife=w240-h345" alt="book cover">
@@ -9,6 +9,7 @@
                 <p><strong>Author:</strong> <%= book["volumeInfo"]["authors"].nil? ? "" : book["volumeInfo"]["authors"].join(", ") %></p>
                 <p> <strong>Pages: </strong><%= book["volumeInfo"]["pageCount"] %></p>
                 <p><strong>Published: </strong><%= book["volumeInfo"]["publishedDate"] %></p>
+                <p><strong>Categories: </strong><%= book["volumeInfo"]["categories"].nil? ? "" : book["volumeInfo"]["categories"][0] %></p>
             </div>
         </div>
     <% end %>
