@@ -3,39 +3,59 @@
             <div class="home-page">
                 <% if user_signed_in? %>
                     <% if current_user.goals.exists? && current_user.goals.last.year < Time.now.year %>
-                        <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                        <h3><%= Date.current.year %> READING GOAL</h3>
                         <hr width="100%" size="2">
                         <p>Set your <%= link_to "reading goal", new_goal_path %></p>
                     <% elsif current_user.goals.exists? && current_user.goals.last.year == Time.now.year %>
-                        <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                        <h3><%= Date.current.year %> READING GOAL</h3>
                         <hr width="100%" size="2">
                         <% goal = current_user.goals.find_by(year: Time.now.year) %>
-                        <p>You want to read <%= goal.number_of_books %> books this year!</p>
-                        <p>You have read <%= current_user.books.where(status: "Read").count %> books.</p>
-                        <%= link_to "Update", edit_goal_path(goal) %>
-                        <%= link_to "Delete", goal_path(goal),
+                        <p>Your goal is <%= goal.number_of_books %> books. You have read <%= current_user.books.where(status: "Read", date: Time.now.year).count %> books this year 🎉.</p>
+                        <%#= link_to "Update", edit_goal_path(goal) %>
+                        <%= link_to "Update", goal_path(goal),
                         data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
 
                     <% else %>
-                        <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                        <h3><%= Date.current.year %> READING GOAL</h3>
                         <hr width="100%" size="2">
                         <p>Set your <%= link_to "reading goal", new_goal_path %></p>
                     <% end %>
                 <% else %>
-                    <h3><em><%= Date.current.year %> READING GOAL</em></h3>
+                    <h3><%= Date.current.year %> READING GOAL</h3>
                     <hr width="100%" size="2">
                     <p> <%= link_to "Sign In", new_user_session_path %> to set your reading goal.</p>
                 <% end %>
             </div>
+            
 
             <div class="home-page mt-3">
-                <h3><em>YOUR FAVORITE BOOKS</em></h3>
+                <h3>YOUR FAVORITE BOOKS</h3>
                 <hr width="100%" size="2">
-                <p>You haven't favorited any books yet. Add some books!</p>
+                <% if user_signed_in? %>
+                    <% if current_user.books.exists? %>
+                    <% favorite_books = current_user.books.where(status: "Favorite") %>
+                        <% if favorite_books.empty? %>
+                            <p> You haven't favorited any books yet. </p>
+                        <% else %>
+                        <div class="container scrollable-section">
+                            <div class="scrollable-wrapper">
+                                <% favorite_books.order("date DESC").limit(10).each do |book| %>
+                                    <div class="recently-read-books">
+                                        <div><%= image_tag book.img_url, class: "recently-read-img" %></div>
+                                        <p class="mt-2"><%= link_to book.title, book_show_path(book.book_id) %></p>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <p> <%= link_to "Sign In", new_user_session_path %> to see your favorite books.</p>    
+                <% end %>
             </div>
 
             <div class="home-page mt-3">
-                <h3><em>RECENTLY READ BOOKS</em></h3>
+                <h3>READ BOOKS</h3>
                 <hr width="100%" size="2">
                 <% if current_user.nil? %>
                     <p> <%= link_to "Sign In", new_user_session_path %> to see your recently read books.</p>
@@ -47,7 +67,7 @@
                         <% else %>
                         <div class="container scrollable-section">
                             <div class="scrollable-wrapper">
-                            <% read_books.order("date_finished DESC").limit(10).each do |book| %>
+                            <% read_books.order("date DESC").limit(10).each do |book| %>
                                 <div class="recently-read-books">
                                 <div><%= image_tag book.img_url, class: "recently-read-img" %></div>
                                 <p class="mt-2"><%= link_to book.title, book_show_path(book.book_id) %></p>
@@ -61,7 +81,7 @@
             </div>
 
             <div class="home-page mt-3">
-                <h3><em>WISHLIST</em></h3>
+                <h3>WANT TO READ</h3>
                 <hr width="100%" size="2">
                 <% if current_user.nil? %>
                     <p> <%= link_to "Sign In", new_user_session_path %> to see your recently read books.</p>
@@ -73,7 +93,7 @@
                         <% else %>
                         <div class="container scrollable-section">
                             <div class="scrollable-wrapper">
-                                <% wishlist_books.order("date_finished DESC").limit(10).each do |book| %>
+                                <% wishlist_books.order("date DESC").limit(10).each do |book| %>
                             <div class="recently-read-books">
                                 <div><%= image_tag book.img_url, class: "recently-read-img" %></div>
                                 <p class="mt-2"><%= link_to book.title, book_show_path(book.book_id) %></p>
@@ -88,7 +108,7 @@
 
 
         <div class="home-page mt-3">
-                <h3><em>CURRENTLY READING</em></h3>
+                <h3>CURRENTLY READING</h3>
                 <hr width="100%" size="2">
                 <% if current_user.nil? %>
                     <p> <%= link_to "Sign In", new_user_session_path %> to add books.</p>
@@ -100,7 +120,7 @@
                         <% else %>
                         <div class="container scrollable-section">
                             <div class="scrollable-wrapper">
-                                <% currently_reading.order("date_finished DESC").limit(10).each do |book| %>
+                                <% currently_reading.order("date DESC").limit(10).each do |book| %>
                             <div class="recently-read-books">
                                 <div><%= image_tag book.img_url, class: "recently-read-img" %></div>
                                 <p class="mt-2"><%= link_to book.title, book_show_path(book.book_id) %></p>
@@ -115,7 +135,7 @@
         </div>
 
             <div class="home-page mt-3">
-                <h3><em>BOOKS PEOPLE ARE LOVING RIGHT NOW</em></h3>
+                <h3>BOOKS PEOPLE ARE LOVING RIGHT NOW</h3>
                 <hr width="100%" size="2">
                 <div class="container scrollable-section">
                     <div class="scrollable-wrapper">

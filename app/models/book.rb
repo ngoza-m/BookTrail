@@ -3,7 +3,7 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :author, presence: true
   validates :img_url, presence: true
-  validates :date_finished, presence: true
+  validates :date, presence: true
   validates :book_id, presence: true
-  validates :status, presence: true, inclusion: { in: ["Read", "Currently Reading", "Wishlist"], message: "%{value} is not a valid status" }
+  validates :status, presence: true, inclusion: { in: ["Read", "Currently Reading", "Want to Read", "Favorite"], message: "%{value} is not a valid status" }
 end

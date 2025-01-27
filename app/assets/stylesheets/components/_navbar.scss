@@ -1,6 +1,6 @@
 .navbar {
   padding: 20px;
-  background-color: $persianred;
+  background-color: black;
   justify-content: space-between;
 
   .btn {
@@ -25,9 +25,14 @@
 }
 
 .navbar-brand {
+  font-size: 30px;
   margin-left: 1rem;
   font-weight: bold;
   color: $light-gray;
+}
+
+.navbar-brand:hover {
+  color: $lilac;
 }
 
 .navbar .navbar-collapse {

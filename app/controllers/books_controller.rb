@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  skip_before_action :authenticate_user!, only: :book_show
+  skip_before_action :authenticate_user!, :only => %i[book_show search]
+
   def new
     @book_read = Book.new
   end
@@ -46,6 +47,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :author, :pages, :img_url, :date_finished, :book_id, :status)
+    params.require(:book).permit(:title, :author, :pages, :img_url, :date, :book_id, :status)
   end
 end
