@@ -1,0 +1,10 @@
+<div class="container form-container">
+    <h1 class="form-heading">Update Your <%= Time.now.year %> Reading Goal</h1>
+    <div class="form-group">
+        <%= simple_form_for @reading_goal do |f| %>
+            <%= f.hidden_field :year, value: @year %> 
+            <%= f.input :number_of_books, as: :integer, input_html: {class: "rounded-input"}, label: 'How many books do you want to read this year?' %>
+            <%= f.button :submit, "Save Goal", class: "btn btn-success" %>
+        <% end %>
+    </div>
+</div>

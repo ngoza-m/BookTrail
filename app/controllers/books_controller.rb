@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  skip_before_action :authenticate_user!, only: :book_show
   def new
     @book_read = Book.new
   end
@@ -7,7 +8,7 @@ class BooksController < ApplicationController
     @book_read = Book.new(book_params)
     @book_read.user = current_user
     if @book_read.save
-      redirect_to root_path, notice: "Book was added."
+      redirect_to book_show_path(params[:id]), notice: "Book was added."
     else
       # render :book_show, status: :unprocessable_entity
       flash.alert = "Book not saved"
@@ -33,6 +34,12 @@ class BooksController < ApplicationController
   def destroy
     @book_to_delete = Book.where(book_id: params[:id])
     @book_to_delete.destroy_all
+    redirect_to book_show_path(params[:id])
+  end
+
+  def update
+    @book_to_edit = Book.where(book_id: params[:id])
+    @book_to_edit.update(status: "Read")
     redirect_to book_show_path(params[:id])
   end
 

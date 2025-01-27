@@ -25,4 +25,19 @@
     padding: 10px 20px;
     text-decoration: none;
     }
+
+    .btn:hover {
+        background-color: black;
+    }
+
+    a {
+        color: white;
+        background-color: $persianred;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+    a:hover {
+        background-color: black;
+    }
 }
